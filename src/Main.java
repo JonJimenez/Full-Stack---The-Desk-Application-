@@ -91,10 +91,31 @@ public class Main {
     private static void searchExpenses(ArrayList<Integer> arrayList) {
         int leng = arrayList.size();
         System.out.println("Enter the expense you need to search:\t");
-        //Complete the method
+        Scanner sc = new Scanner(System.in);
+        int input = sc.nextInt();
+        for(int i =0;i<leng;i++) {
+        	if(arrayList.get(i)==input) {
+        		System.out.println("The expense " +input+" has been found at index "+i+"\n");
+        		sc.close();
+        		return;
+        	}
+        }
+        System.out.println("The expense S"+input+" was not found\n");
+        sc.close();
     }
     private static void sortExpenses(ArrayList<Integer> arrayList) {
         int arrlength =  arrayList.size();
+        for (int i=0;i<arrlength-1;i++) {
+        	for(int j=1;j<arrlength-i;j++) {
+        		if(arrayList.get(j-1)>arrayList.get(j)) {
+        			int temp = arrayList.get(j-1);
+        			arrayList.set(j-1,arrayList.get(j));
+        			arrayList.set(j,temp);
+        		}
+        	}
+        }
+        System.out.println("Your expenses have been sorted in ascending order\n");
+        System.out.println(arrayList+"\n");
        //Complete the method. The expenses should be sorted in ascending order.
     }
 }
