@@ -1,10 +1,27 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
-
+import quickSorting.QSort;
 public class Main {
+
+
+    private static ArrayList<Integer> arrlist = new ArrayList<Integer>(); // TODO: do we really need arrlist at all?
+    private static ArrayList<Integer> expenses = new ArrayList<Integer>();
+
+    public static void addSampleExpenses() {
+        expenses.add(1000);
+        expenses.add(2300);
+        expenses.add(45000);
+        expenses.add(32000);
+        expenses.add(110);
+        expenses.addAll(arrlist); // TODO: do we really need arrlist at all?
+
+    }
 
     public static void main(String[] args) {
         /*System.out.println("Hello World!");*/
+
+        addSampleExpenses();
         System.out.println("\n**************************************\n");
         System.out.println("\tWelcome to TheDesk \n");
         System.out.println("**************************************");
@@ -12,6 +29,7 @@ public class Main {
 
     }
     private static void optionsSelection() {
+        System.out.println("\n**************************************\n");
         String[] arr = {"1. I wish to review my expenditure",
                 "2. I wish to add my expenditure",
                 "3. I wish to delete my expenditure",
@@ -25,14 +43,6 @@ public class Main {
             System.out.println(arr[i]);
             // display the all the Strings mentioned in the String array
         }
-        ArrayList<Integer> arrlist = new ArrayList<Integer>();
-        ArrayList<Integer> expenses = new ArrayList<Integer>();
-        expenses.add(1000);
-        expenses.add(2300);
-        expenses.add(45000);
-        expenses.add(32000);
-        expenses.add(110);
-        expenses.addAll(arrlist);
         System.out.println("\nEnter your choice:\t");
         Scanner sc = new Scanner(System.in);
         int  options =  sc.nextInt();
@@ -45,6 +55,7 @@ public class Main {
                         optionsSelection();
                         break;
                     case 2:
+                        //TODO: Make the changes "sticky"
                         System.out.println("Enter the value to add your Expense: \n");
                         int value = sc.nextInt();
                         expenses.add(value);
@@ -55,6 +66,7 @@ public class Main {
 
                         break;
                     case 3:
+                        //TODO: Make the changes "sticky"
                         System.out.println("You are about the delete all your expenses! \nConfirm again by selecting the same option...\n");
                         int con_choice = sc.nextInt();
                         if(con_choice==options){
@@ -92,30 +104,29 @@ public class Main {
         int leng = arrayList.size();
         System.out.println("Enter the expense you need to search:\t");
         Scanner sc = new Scanner(System.in);
-        int input = sc.nextInt();
-        for(int i =0;i<leng;i++) {
-        	if(arrayList.get(i)==input) {
-        		System.out.println("The expense " +input+" has been found at index "+i+"\n");
-        		sc.close();
+        int  expense =  sc.nextInt();
+
+        System.out.println("You are searching for: " + expense);
+        for(int i=0;i<leng-1;i++) {
+        	if(arrayList.get(i) ==expense) {
+        		System.out.println("Expense has been found");
         		return;
         	}
         }
-        System.out.println("The expense S"+input+" was not found\n");
-        sc.close();
+        System.out.println("Expense was not found");
+        //TODO: Complete the method
     }
     private static void sortExpenses(ArrayList<Integer> arrayList) {
         int arrlength =  arrayList.size();
-        for (int i=0;i<arrlength-1;i++) {
-        	for(int j=1;j<arrlength-i;j++) {
-        		if(arrayList.get(j-1)>arrayList.get(j)) {
-        			int temp = arrayList.get(j-1);
-        			arrayList.set(j-1,arrayList.get(j));
-        			arrayList.set(j,temp);
-        		}
-        	}
+
+        int[] array =  arrayList.stream().mapToInt(i -> i).toArray();
+        QSort qSort = new QSort();
+        qSort.sort(array,0,array.length-1);
+        for(int num:array) {
+        	System.out.println(num);
         }
-        System.out.println("Your expenses have been sorted in ascending order\n");
-        System.out.println(arrayList+"\n");
-       //Complete the method. The expenses should be sorted in ascending order.
+       //TODO: Complete the method. The expenses should be sorted in ascending order.
     }
+    
+   
 }
